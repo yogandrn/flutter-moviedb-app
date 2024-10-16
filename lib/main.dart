@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,8 +9,10 @@ import 'presentation/pages/home_page.dart';
 import 'presentation/themes/colors.dart';
 
 void main() {
-  Future.delayed(const Duration(milliseconds: 1200));
-  runApp(const MyApp());
+  Timer(
+    const Duration(milliseconds: 1200),
+    () => runApp(const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {

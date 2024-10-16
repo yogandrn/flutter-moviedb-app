@@ -15,6 +15,8 @@ class GridItemMovie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final heroTag = movie.uniqueKey;
+
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
@@ -29,36 +31,39 @@ class GridItemMovie extends StatelessWidget {
                 ),
                 width: 500,
                 height: 500,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: movie.posterPath != null
-                      ? CachedNetworkImage(
-                          imageUrl: "${movie.posterPath}",
-                          fit: BoxFit.cover,
-                          progressIndicatorBuilder: (context, url, progress) =>
-                              Skeletonizer(
-                                  enabled: true,
-                                  child: Image.asset(
-                                    AssetConst.invalidImage,
-                                    width: double.maxFinite,
-                                    height: double.maxFinite,
-                                    fit: BoxFit.cover,
-                                  )),
-                          errorWidget: (context, url, error) => Center(
+                child: Hero(
+                  tag: heroTag,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: movie.posterPath != null
+                        ? CachedNetworkImage(
+                            imageUrl: "${movie.posterPath}",
+                            fit: BoxFit.cover,
+                            progressIndicatorBuilder:
+                                (context, url, progress) => Skeletonizer(
+                                    enabled: true,
+                                    child: Image.asset(
+                                      AssetConst.invalidImage,
+                                      width: double.maxFinite,
+                                      height: double.maxFinite,
+                                      fit: BoxFit.cover,
+                                    )),
+                            errorWidget: (context, url, error) => Center(
+                              child: Image.asset(
+                                AssetConst.invalidImage,
+                                width: 84,
+                              ),
+                            ),
+                          )
+                        : Skeletonizer(
                             child: Image.asset(
                               AssetConst.invalidImage,
-                              width: 84,
+                              width: double.maxFinite,
+                              height: double.maxFinite,
+                              fit: BoxFit.cover,
                             ),
                           ),
-                        )
-                      : Skeletonizer(
-                          child: Image.asset(
-                            AssetConst.invalidImage,
-                            width: double.maxFinite,
-                            height: double.maxFinite,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                  ),
                 ),
               ),
             ),

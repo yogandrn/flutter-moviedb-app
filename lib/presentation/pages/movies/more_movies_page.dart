@@ -100,7 +100,7 @@ class _MoreMoviesPageState extends State<MoreMoviesPage> {
       itemBuilder: (context, index) => GridItemMovie(
         movie: movies[index],
         onTap: () {
-          final heroKey = UniqueKey().toString();
+          final heroKey = movies[index].uniqueKey;
           Navigator.push(
             context,
             MaterialPageRoute(

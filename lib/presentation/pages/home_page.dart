@@ -280,7 +280,7 @@ class _HomePageState extends State<HomePage> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
-              final heroTag = UniqueKey().toString();
+              final heroTag = movies[index].uniqueKey;
               return ListItemMovieVertical(
                 movie: movies[index],
                 onTap: () {

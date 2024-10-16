@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
 import '../../core/configs/constanta_api.dart';
 
 ResponseListMovies responseListMoviesFromJson(String str) =>
@@ -82,6 +85,7 @@ class Dates {
 
 class MovieData {
   String? backdropPath;
+  String uniqueKey;
   int id;
   String? title;
   String? originalTitle;
@@ -113,9 +117,11 @@ class MovieData {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
+    this.uniqueKey = 'unique',
   });
 
   factory MovieData.fromJson(Map<String, dynamic> json) => MovieData(
+        uniqueKey: UniqueKey().toString(),
         adult: json["adult"] ?? false,
         backdropPath: json["backdrop_path"] == null
             ? null

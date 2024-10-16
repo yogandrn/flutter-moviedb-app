@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
 import '../../core/configs/constanta_api.dart';
 
 ResponseDetailMovie responseDetailMovieFromJson(String str) =>
@@ -10,6 +12,7 @@ String responseDetailMovieToJson(ResponseDetailMovie data) =>
 
 class ResponseDetailMovie {
   int id;
+  String uniqueKey;
   bool? adult;
   String? backdropPath;
   dynamic belongsToCollection;
@@ -40,6 +43,7 @@ class ResponseDetailMovie {
   String statusMessage;
 
   ResponseDetailMovie({
+    this.uniqueKey = 'unique',
     this.adult,
     this.backdropPath,
     this.belongsToCollection,
@@ -73,6 +77,7 @@ class ResponseDetailMovie {
 
   factory ResponseDetailMovie.fromJson(Map<String, dynamic> json) =>
       ResponseDetailMovie(
+        uniqueKey: UniqueKey().toString(),
         adult: json["adult"],
         backdropPath: json["backdrop_path"] == null
             ? null

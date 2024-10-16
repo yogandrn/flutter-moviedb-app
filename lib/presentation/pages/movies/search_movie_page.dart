@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ditonton/presentation/pages/errors/custom_no_internet_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -100,7 +102,7 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
               itemCount: widget.initialData.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
-                final heroTag = UniqueKey().toString();
+                final heroTag = widget.initialData[index].uniqueKey;
                 return ListItemMovieVertical(
                   movie: widget.initialData[index],
                   onTap: () {
@@ -139,7 +141,7 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
                   itemCount: searchResults.length,
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
-                    final heroTag = UniqueKey().toString();
+                    final heroTag = searchResults[index].uniqueKey;
                     return ListItemMovieVertical(
                       movie: searchResults[index],
                       onTap: () {
@@ -227,27 +229,15 @@ class _SearchMoviePageState extends State<SearchMoviePage> {
           ),
         ),
         onFieldSubmitted: (value) {
-          if (searchController.text.isNotEmpty) {
-            movieBloc.add(SearchMovies(searchController.text));
+          if (value.isNotEmpty) {
+            movieBloc.add(SearchMovies(value));
           }
         },
         onChanged: (value) {
-          if (searchController.text.isNotEmpty) {
-            movieBloc.add(SearchMovies(searchController.text));
+          if (value.isNotEmpty) {
+            log(value);
+            movieBloc.add(SearchMovies(value));
           }
-          // if (value.length >= 3) {
-          //   jobBloc.add(JobSearhing(value));
-          // }
-          // if (value.isEmpty) {
-          //   jobBloc.add(const JobDefaultSearch());
-          // }
-          // if (value.isEmpty) {
-          //   contactBloc.add(
-          //     ContactSearch(
-          //         listContacts: contactsList, keyword: keywordController.text),
-          //   );
-          // }
-          // jobBloc.add(JobSearhing(value));
         },
       ),
     );

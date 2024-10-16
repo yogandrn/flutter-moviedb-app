@@ -14,7 +14,7 @@ class CarouselImageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final heroKey = UniqueKey().toString();
+    final heroKey = movie.uniqueKey;
     return GestureDetector(
       onTap: () => Navigator.push(
         context,

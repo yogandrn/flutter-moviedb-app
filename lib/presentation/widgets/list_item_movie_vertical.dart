@@ -31,7 +31,7 @@ class ListItemMovieVertical extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Hero(
-              tag: heroKey,
+              tag: movie.uniqueKey,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
